@@ -1,4 +1,4 @@
-import { greeting } from "./test.js";
+import { greeting } from "./project.js";
 import "./styles.scss";
 
 console.log(greeting);
