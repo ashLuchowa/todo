@@ -1,4 +1,4 @@
-import { greeting } from "./project.js";
+import { projects, Project } from "./project.js";
 import "./styles.scss";
 
-console.log(greeting);
+console.log(Project.pushDefaultProject());
