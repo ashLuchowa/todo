@@ -12,55 +12,60 @@ class Task {
 }
 
 // Project Class Template
-export class Project {
+class Project {
     constructor(title, description, addtaskBtn, taskArray) {
         this.title = title;
         this.description = description;
         this.addtaskBtn = addtaskBtn;
         this.taskArray = taskArray;
     }
+}
 
-    // Empty Array to store default / new projects
-    static projects = [];
-    // Empth Array to store default / new Tasks
-    static taskContainer = [];
-
-    // 3 default projects on page load
-    static defaultProjects = [
-        new Project('Portfolio 2025', 'Website to feature all my work', 'add-task-btn', this.taskContainer),
-        new Project('Cleaning February', 'Cleaning duties around the house', 'add-task-btn', this.taskContainer),
-        new Project('Apply Jobs', 'Need to apply jobs', 'add-task-btn', this.taskContainer),
-    ];
-
-    // Push default projects into array
-    static pushDefaultProject() {
-        Project.defaultProjects.forEach(item => {
-            Project.projects.push(item);
-        });
-    }
+class ManageTask {
+    static tasks = [];
 
     static defaultTasks = [
         new Task('Create website', 'Website to show all featured works', '24 Feb 2025', 'high', 'In Progress', 'Setting', 'Portfolio 2025'),
-        new Task('Create website', 'Website to show all featured works', '24 Feb 2025', 'high', 'In Progress', 'Setting', 'Cleaning February'),
+        new Task('Remove Spiders', 'So many spider nets and dusts', '26 Mar 2025', 'Medium', 'In Progress', 'Setting', 'Cleaning February'),
     ]
 
     // Push default tasks into appropriate project
     static pushDefaultTask() {
-        Project.defaultTasks.forEach(item => {
-            Project.taskContainer.push(item);
-        });
-    }
-    
-    static matchProject() {
-        Project.projects.forEach(itemProject => {
-            Project.taskContainer.forEach(itemTask => {
-                if(itemProject.title === itemTask.projectParent) {
-                    // Normally a dom function would be here
-                    console.log(itemProject);
-                }
-            });
+        ManageTask.defaultTasks.forEach(item => {
+            ManageTask.tasks.push(item);
         });
     }
 }
 
+class ManageProject {
+    static projects = [];
 
+    static defaultProjects = [
+        new Project('Portfolio 2025', 'Website to feature all my work', 'add-task-btn', ManageTask.tasks),
+        new Project('Cleaning February', 'Cleaning duties around the house', 'add-task-btn', ManageTask.tasks),
+        new Project('Apply Jobs', 'Need to apply jobs', 'add-task-btn', ManageTask.tasks),
+    ];
+
+    // Push default projects into array
+    static pushDefaultProject() {
+        ManageProject.defaultProjects.forEach(item => {
+            ManageProject.projects.push(item);
+        });
+    }
+}
+
+export function matchProject() {
+    ManageProject.projects.forEach(itemProject => {
+        ManageTask.tasks.forEach(itemTask => {
+            if (itemProject.title === itemTask.projectParent) {
+                // Normally a dom function would be here
+                console.log(itemProject);
+            }
+        });
+    });
+}
+
+(function logicInit() {
+    ManageProject.pushDefaultProject();
+    ManageTask.pushDefaultTask();
+})();

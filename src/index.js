@@ -1,8 +1,4 @@
-import { projects, Project } from "./project.js";
+import { ManageProject, ManageTask, matchProject } from "./project";
 import "./styles.scss";
 
-Project.pushDefaultProject();
-
-Project.pushDefaultTask();
-
-Project.matchProject();
+matchProject();
