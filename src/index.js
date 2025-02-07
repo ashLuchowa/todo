@@ -1,4 +1,8 @@
 import { projects, Project } from "./project.js";
 import "./styles.scss";
 
-console.log(Project.pushDefaultProject());
+Project.pushDefaultProject();
+
+Project.pushDefaultTask();
+
+Project.matchProject();
