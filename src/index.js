@@ -8,17 +8,6 @@ function initialiseApp() {
     sidebar.projectList();
 }
 
-function generateMain() {
-    const outerBox = document.querySelector('.main-container');
-
-    // Avoid repeating
-    const existingContent = document.querySelector('.main-content');
-    if (!existingContent) {
-        const mainElement = new MainUI(outerBox);
-        mainElement.mainInfo();
-    }
-}
-
 class SideUI {
     constructor(outerBox) {
         this.sidebarContainer = document.createElement('div');
@@ -56,11 +45,7 @@ class SideUI {
             projectListContainer.appendChild(projectSideTitle);
 
             // Click on each project to generate main content
-            projectSideTitle.addEventListener('click', (e) => {
-                console.log(`You clicked on ${e.target.textContent}`);
-                generateMain();
-            });
-
+            projectSideTitle.addEventListener('click', generateMain);
         });
 
         this.sidebarContainer.appendChild(addProjectBtn);
@@ -68,38 +53,30 @@ class SideUI {
     };
 };
 
+function generateMain(e) {
+    const outerBox = document.querySelector('.main-container');
 
-class MainUI {
-    constructor(outerBox) {
-        this.mainContentContainer = document.createElement('div');
-        this.mainContentContainer.classList.add('main-content');
-        outerBox.appendChild(this.mainContentContainer);
+    const projectTitle = e.target.textContent;
+
+
+    // Find the correstponding project from Project Array
+    const projectResult = ManageProject.projects.find((p) => {
+        return p.title === projectTitle;
+    });
+
+    if (projectResult) {
+        console.log(projectResult.title);
+
+        // title
+        const headerTitle = document.createElement('div');
+        headerTitle.textContent = projectResult.title;
+
+        outerBox.appendChild(headerTitle);
     }
 
-    mainInfo() {
-        // Header section
-        const taskHeaderContainer = document.createElement('div');
-        taskHeaderContainer.classList.add('task-header-container');
+    // console.log(ManageProject.defaultProjects);
 
-        const headerTitle = document.createElement('div');
-        headerTitle.classList.add('header-title');
-        headerTitle.textContent = 'Project Name';
-        const headerAddBtn = document.createElement('button');
-        headerAddBtn.classList.add('header-add-btn');
-        headerAddBtn.textContent = 'Add Task';
 
-        // Project Description
-        const projectDescription = document.createElement('div');
-        projectDescription.classList.add('project-description');
-        projectDescription.textContent = 'This is the project description';
-
-        // Append children
-        taskHeaderContainer.appendChild(headerTitle);
-        taskHeaderContainer.appendChild(headerAddBtn);
-        this.mainContentContainer.appendChild(taskHeaderContainer);
-        this.mainContentContainer.appendChild(projectDescription);
-    };
-};
-
+}
 
 initialiseApp();

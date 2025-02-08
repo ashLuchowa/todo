@@ -42,7 +42,6 @@ export class ManageTask {
                 foundItem.taskArray.push(itemTask);
             }
         });
-        console.log(ManageProject.projects);
     }
 }
 
