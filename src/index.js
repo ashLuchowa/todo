@@ -1,5 +1,6 @@
-import { ManageProject, ManageTask, matchProject } from "./project";
+import { matchProject } from "./project";
 import "./styles.scss";
+import { setupUI } from "./dom";
 
 matchProject();
-console.log('Hello World!');
+setupUI();
