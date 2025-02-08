@@ -12,8 +12,8 @@ class Task {
 }
 
 // Project Class Template
-class Project {
-    constructor(title, description, addtaskBtn, taskArray) {
+export class Project {
+    constructor(title, description, addtaskBtn, taskArray = []) {
         this.title = title;
         this.description = description;
         this.addtaskBtn = addtaskBtn;
@@ -21,19 +21,28 @@ class Project {
     }
 }
 
-class ManageTask {
+export class ManageTask {
     static tasks = [];
 
     static defaultTasks = [
         new Task('Create website', 'Website to show all featured works', '24 Feb 2025', 'high', 'In Progress', 'Setting', 'Portfolio 2025'),
         new Task('Remove Spiders', 'So many spider nets and dusts', '26 Mar 2025', 'Medium', 'In Progress', 'Setting', 'Cleaning February'),
+        new Task('Create Logo', 'Logo for my brand identity', '02 Apr 2025', 'Medium', 'In Progress', 'Setting', 'Portfolio 2025'),
     ]
 
     // Push default tasks into appropriate project
     static pushDefaultTask() {
-        ManageTask.defaultTasks.forEach(item => {
-            ManageTask.tasks.push(item);
+
+        this.defaultTasks.forEach(itemTask => {
+            const foundItem = ManageProject.projects.find((itemProject) => {
+                return itemProject.title === itemTask.projectParent;
+            });
+
+            if (foundItem) {
+                foundItem.taskArray.push(itemTask);
+            }
         });
+        console.log(ManageProject.projects);
     }
 }
 
@@ -41,9 +50,9 @@ export class ManageProject {
     static projects = [];
 
     static defaultProjects = [
-        new Project('Portfolio 2025', 'Website to feature all my work', 'add-task-btn', ManageTask.tasks),
-        new Project('Cleaning February', 'Cleaning duties around the house', 'add-task-btn', ManageTask.tasks),
-        new Project('Apply Jobs', 'Need to apply jobs', 'add-task-btn', ManageTask.tasks),
+        new Project('Portfolio 2025', 'Website to feature all my work', 'add-task-btn', []),
+        new Project('Cleaning February', 'Cleaning duties around the house', 'add-task-btn', []),
+        new Project('Apply Jobs', 'Need to apply jobs', 'add-task-btn', []),
     ];
 
     // Push default projects into array
@@ -52,17 +61,6 @@ export class ManageProject {
             ManageProject.projects.push(item);
         });
     }
-}
-
-export function matchProject() {
-    ManageProject.projects.forEach(itemProject => {
-        ManageTask.tasks.forEach(itemTask => {
-            if (itemProject.title === itemTask.projectParent) {
-                // Normally a dom function would be here
-                console.log(itemProject);
-            }
-        });
-    });
 }
 
 (function logicInit() {

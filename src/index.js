@@ -1,5 +1,5 @@
 import "./styles.scss";
-import { ManageProject } from "./project";
+import { ManageProject, Project, ManageTask } from "./project";
 
 function initialiseApp() {
     const outerBox = document.querySelector('.main-container');
@@ -13,7 +13,7 @@ function generateMain() {
 
     // Avoid repeating
     const existingContent = document.querySelector('.main-content');
-    if(!existingContent) {
+    if (!existingContent) {
         const mainElement = new MainUI(outerBox);
         mainElement.mainInfo();
     }
