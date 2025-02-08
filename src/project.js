@@ -37,7 +37,7 @@ class ManageTask {
     }
 }
 
-class ManageProject {
+export class ManageProject {
     static projects = [];
 
     static defaultProjects = [
