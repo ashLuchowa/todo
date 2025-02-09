@@ -36,7 +36,7 @@ body {
     background-color: rgb(186, 167, 205);
 }
 
-.main-container {
+.outer-container {
     display: grid;
     grid-template-columns: 1fr 4fr;
     height: 100vh;
@@ -49,6 +49,6 @@ body {
 }
 
 /*--------- MAIN CONTENT ---------*/
-.main-container {
+.outer-container {
     background-color: bisque;
 }

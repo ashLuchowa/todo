@@ -2,7 +2,7 @@ import "./styles.scss";
 import { ManageProject, Project, ManageTask } from "./project";
 
 function initialiseApp() {
-    const outerBox = document.querySelector('.main-container');
+    const outerBox = document.querySelector('.outer-container');
     const sidebar = new SideUI(outerBox);
     sidebar.renderLogo();
     sidebar.projectList();
@@ -54,10 +54,20 @@ class SideUI {
 };
 
 function generateMain(e) {
-    const outerBox = document.querySelector('.main-container');
+    const outerBox = document.querySelector('.outer-container');
+    const mainContent = document.createElement('div');
+    mainContent.classList.add('main-content');
+    let existMainContent = outerBox.querySelector('.main-content');
 
+    // Stop repeating and reset mainContent
+    if(existMainContent) {
+        existMainContent.remove();
+    } 
+
+    outerBox.appendChild(mainContent);
+
+    // Clicked target
     const projectTitle = e.target.textContent;
-
 
     // Find the correstponding project from Project Array
     const projectResult = ManageProject.projects.find((p) => {
@@ -65,18 +75,13 @@ function generateMain(e) {
     });
 
     if (projectResult) {
-        console.log(projectResult.title);
-
-        // title
+        // generate title
         const headerTitle = document.createElement('div');
+        headerTitle.classList.add('header-title');
         headerTitle.textContent = projectResult.title;
 
-        outerBox.appendChild(headerTitle);
+        mainContent.appendChild(headerTitle);
     }
-
-    // console.log(ManageProject.defaultProjects);
-
-
 }
 
 initialiseApp();
