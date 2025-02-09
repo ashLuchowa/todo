@@ -130,6 +130,14 @@ function generateMain(e) {
             renderTaskInfo(task);
         })
     }
+
+    // Target each task setting
+    const result = document.querySelectorAll('.task-setting');
+    result.forEach(item => {
+        item.addEventListener('click', (e) => {
+            console.log(e.target.parentNode.parentNode);
+        });
+    });
 }
 
 initialiseApp();

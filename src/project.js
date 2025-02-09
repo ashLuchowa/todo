@@ -32,7 +32,7 @@ export class ManageTask {
     ]
 
     // Push default tasks into appropriate project
-    static pushDefaultTask() {
+    static pushSpecificTask() {
 
         this.defaultTasks.forEach(itemTask => {
             const foundItem = ManageProject.projects.find((itemProject) => {
@@ -66,5 +66,5 @@ export class ManageProject {
 
 (function logicInit() {
     ManageProject.pushDefaultProject();
-    ManageTask.pushDefaultTask();
+    ManageTask.pushSpecificTask();
 })();
