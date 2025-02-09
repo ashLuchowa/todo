@@ -46,6 +46,14 @@ body {
 /*--------- SIDEBAR ---------*/
 .sidebar-container {
     background-color: aqua;
+    .project-list-container {
+        p {
+            cursor: pointer;
+            &:hover {
+                background-color: red;
+            }
+        }
+    }
 }
 
 /*--------- MAIN CONTENT ---------*/
@@ -57,9 +65,20 @@ body {
         grid-template-rows: 1fr 1fr;
         gap: 30px;
         .inner-task-container {
+            position: relative;
             height: 150px;
             width: 350px;
             border: 1px solid black;
+            .task-setting {
+                button {
+                    position: absolute;
+                    background: none;
+                    border: 1px solid black;
+                    top: 0;
+                    right: 0;
+                    cursor: pointer;
+                }
+            }
         }
     }
 }

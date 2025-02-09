@@ -117,6 +117,7 @@ function generateMain(e) {
         constructTaskInfo('dateType', 'p', 'Due: ', task.dueDate, 'task-date');
         constructTaskInfo('priorityType', 'p', 'Priority: ', task.priority, 'task-priority');
         constructTaskInfo('statusType', 'p', 'Status: ', task.status, 'task-status');
+        constructTaskInfo('settingType', 'button', '', task.setting, 'task-setting');
     }
 
     if (projectResult) {
@@ -130,7 +131,5 @@ function generateMain(e) {
         })
     }
 }
-
-
 
 initialiseApp();

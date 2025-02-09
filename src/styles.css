@@ -45,6 +45,12 @@ body {
 .sidebar-container {
   background-color: aqua;
 }
+.sidebar-container .project-list-container p {
+  cursor: pointer;
+}
+.sidebar-container .project-list-container p:hover {
+  background-color: red;
+}
 
 /*--------- MAIN CONTENT ---------*/
 .main-content {
@@ -57,7 +63,16 @@ body {
   gap: 30px;
 }
 .main-content .outer-task-container .inner-task-container {
+  position: relative;
   height: 150px;
   width: 350px;
   border: 1px solid black;
+}
+.main-content .outer-task-container .inner-task-container .task-setting button {
+  position: absolute;
+  background: none;
+  border: 1px solid black;
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }/*# sourceMappingURL=styles.css.map */
