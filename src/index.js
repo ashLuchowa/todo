@@ -59,10 +59,18 @@ function generateMain(e) {
     mainContent.classList.add('main-content');
     let existMainContent = outerBox.querySelector('.main-content');
 
+    // Div to store Project header info
+    const outerProjectDiv = document.createElement('div');
+    outerProjectDiv.classList.add('main-header');
+
+    // Div to store Task Containers
+    const outerTaskContainer = document.createElement('div');
+    outerTaskContainer.classList.add('outer-task-container');
+
     // Stop repeating and reset mainContent
-    if(existMainContent) {
+    if (existMainContent) {
         existMainContent.remove();
-    } 
+    }
 
     outerBox.appendChild(mainContent);
 
@@ -74,14 +82,55 @@ function generateMain(e) {
         return p.title === projectTitle;
     });
 
+    // Render project in main area
+    function renderMainInfo(elementDiv, elementAttribute, value) {
+        elementDiv = document.createElement('div');
+        elementDiv.classList.add(`header-${value}`);
+        elementDiv.textContent = elementAttribute;
+
+        outerProjectDiv.appendChild(elementDiv);
+        mainContent.appendChild(outerProjectDiv);
+    }
+
+    // Render selected project's tasks in main area
+    function renderTaskInfo(task) {
+        const innerTaskContainer = document.createElement('div');
+        innerTaskContainer.classList.add('inner-task-container');
+
+        // Function to generate each task detail such as title, description...
+        function constructTaskInfo(elementType, type, contentType, displayContent, taskValue) {
+            elementType = document.createElement(type);
+            elementType.textContent = `${contentType}${displayContent}`;
+
+            const taskDiv = document.createElement('div');
+            taskDiv.classList.add(taskValue);
+            taskDiv.appendChild(elementType);
+
+            innerTaskContainer.appendChild(taskDiv);
+        }
+
+        mainContent.appendChild(outerTaskContainer);
+        outerTaskContainer.appendChild(innerTaskContainer);
+
+        constructTaskInfo('titleType', 'p', '', task.title, 'task-title');
+        constructTaskInfo('descriptionType', 'p', '', task.description, 'task-description');
+        constructTaskInfo('dateType', 'p', 'Due: ', task.dueDate, 'task-date');
+        constructTaskInfo('priorityType', 'p', 'Priority: ', task.priority, 'task-priority');
+        constructTaskInfo('statusType', 'p', 'Status: ', task.status, 'task-status');
+    }
+
     if (projectResult) {
         // generate title
-        const headerTitle = document.createElement('div');
-        headerTitle.classList.add('header-title');
-        headerTitle.textContent = projectResult.title;
-
-        mainContent.appendChild(headerTitle);
+        renderMainInfo('header-title', projectResult.title, 'title');
+        renderMainInfo('header-description', projectResult.description, 'description');
+        
+        // Render Tasks
+        projectResult.taskArray.forEach(task => {
+            renderTaskInfo(task);
+        })
     }
 }
+
+
 
 initialiseApp();
