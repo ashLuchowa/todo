@@ -46,12 +46,27 @@ class SideUI {
 
             // Click on each project to generate main content
             projectSideTitle.addEventListener('click', generateMain);
+
+            return { projectSideContainer };
         });
 
         this.sidebarContainer.appendChild(addProjectBtn);
         this.sidebarContainer.appendChild(projectListContainer);
+
+        // Add Project Event
+        addProjectBtn.addEventListener('click', addProjectForm(projectListContainer));
     };
 };
+
+// Display Form
+function addProjectForm(displaySideTitle) {
+    const newProject = new Project('Eat Noodles', 'Lets cook that egg', '', []);
+
+    const newProjectItem = document.createElement('p');
+    newProjectItem.textContent = newProject.title;
+
+    displaySideTitle.append(newProjectItem);
+}
 
 function generateMain(e) {
     const outerBox = document.querySelector('.outer-container');
@@ -124,7 +139,7 @@ function generateMain(e) {
         // generate title
         renderMainInfo('header-title', projectResult.title, 'title');
         renderMainInfo('header-description', projectResult.description, 'description');
-        
+
         // Render Tasks
         projectResult.taskArray.forEach(task => {
             renderTaskInfo(task);
@@ -138,6 +153,12 @@ function generateMain(e) {
             console.log(e.target.parentNode.parentNode);
         });
     });
+}
+
+class mainUI {
+    constructor(outerBox) {
+        this.outerBox = outerBox;
+    }
 }
 
 initialiseApp();

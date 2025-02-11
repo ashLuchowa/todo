@@ -22,7 +22,7 @@ export class Project {
 }
 
 export class ManageTask {
-    static tasks = [];
+    static allTasks = [];
 
     static defaultTasks = [
         new Task('Create website', 'Website to show all featured works', '24 Feb 2025', 'high', 'In Progress', 'Setting', 'Portfolio 2025'),
@@ -32,9 +32,10 @@ export class ManageTask {
     ]
 
     // Push default tasks into appropriate project
-    static pushSpecificTask() {
-
+    static pushTask() {
         this.defaultTasks.forEach(itemTask => {
+
+            // Push default tasks into appropriate projects
             const foundItem = ManageProject.projects.find((itemProject) => {
                 return itemProject.title === itemTask.projectParent;
             });
@@ -42,7 +43,11 @@ export class ManageTask {
             if (foundItem) {
                 foundItem.taskArray.push(itemTask);
             }
+
+            // Push all default tasks into allTasks Array
+            this.allTasks.push(itemTask);
         });
+        console.log(this.allTasks);
     }
 }
 
@@ -66,5 +71,5 @@ export class ManageProject {
 
 (function logicInit() {
     ManageProject.pushDefaultProject();
-    ManageTask.pushSpecificTask();
+    ManageTask.pushTask();
 })();
